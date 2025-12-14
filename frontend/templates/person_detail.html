@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="card shadow-sm p-3 mb-5 bg-secondary text-light rounded">
+        <div class="card-body">
+            <h2 class="card-title mb-4">{{ person.primary_name }}</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <p class="mb-2">
+                        <strong>Profession:</strong>
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for prof in person.primary_profession.split(',') %}
+                            <span class="badge bg-info text-dark">{{ prof.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Birth year:</strong> <span class="badge bg-warning text-dark">{{ person.birth_year }}</span></p>
+                </div>
+            </div>
+
+            <h4 class="mb-3">Known for:</h4>
+            <ul class="list-group">
+            {% for t in person.known_for %}
+                <li class="list-group-item">
+                    <a href="/title/{{ t.tconst }}" class="text-decoration-none">
+                        {{ t.primary_title }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+
+            <div class="mt-4">
+                <a href="{{ request.referrer or url_for('index') }}" class="btn btn-outline-light">
+                    <i class="bi bi-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

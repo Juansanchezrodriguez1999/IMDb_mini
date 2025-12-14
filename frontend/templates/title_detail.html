@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="card shadow-sm p-3 mb-5 bg-secondary text-light rounded">
+        <div class="card-body">
+            <h2 class="card-title mb-4">{{ title.primary_title }} ({{ title.start_year }})</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5><strong>Genres:</strong></h5>
+                    <ul class="list-unstyled">
+                        {% for genre in title.genres.split(',') %}
+                        <li><span class="badge bg-info text-dark">{{ genre.strip() }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Runtime:</strong> <span class="text-light">{{ title.runtime_minutes }} min</span></p>
+                </div>
+            </div>
+
+            <h4 class="mb-3">Cast:</h4>
+            <ul class="list-group">
+            {% for c in title.cast %}
+                <li class="list-group-item">
+                    <a href="/resolve-person/{{ c.person_name }}/{{ title.tconst }}" class="text-decoration-none">
+                        <strong>{{ c.person_name }}</strong>
+                    </a>
+                    — {{ c.category }}
+                    {% if c.characters %} ({{ c.characters }}) {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+
+            <div class="mt-4">
+                <a href="{{ request.referrer or url_for('index') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

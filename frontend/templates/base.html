@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>IMDb Mini</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-light">
+
+<nav class="navbar navbar-dark bg-secondary px-3 mb-4">
+    <a class="navbar-brand" href="/">IMDb Mini</a>
+</nav>
+
+<div class="container mb-4">
+    <form action="/search" method="get" class="d-flex justify-content-center">
+        <input name="q" class="form-control me-2" placeholder="Buscar..." required style="max-width: 300px;">
+        <select name="mode" class="form-select me-2" style="max-width: 150px;">
+            <option value="person">People</option>
+            <option value="title">Films</option>
+        </select>
+        <button class="btn btn-warning">Search</button>
+    </form>
+</div>
+
+<div class="container d-flex flex-column align-items-center">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

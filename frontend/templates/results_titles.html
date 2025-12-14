@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">Results for "{{ query }}"</h2>
+
+<div class="row mt-4 justify-content-center">
+
+{% for t in results %}
+<div class="col-md-4 d-flex">
+    <div class="card bg-secondary text-light mb-3 flex-fill shadow-sm">
+        <div class="card-body d-flex flex-column">
+
+            <h4 class="mb-3 text-center">{{ t.primary_title }}</h4>
+            
+            <div class="mb-3">
+                <div><strong>Genres:</strong></div>
+                <ul class="list-unstyled small mb-0">
+                    {% if t.genres %}
+                        {% for genre in t.genres.split(',') %}
+                        <li>
+                            <span class="badge bg-info text-dark">
+                                {{ genre.strip() }}
+                            </span>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>
+                            <span class="badge bg-secondary">
+                                Unknown
+                            </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="mb-3">
+                <div><strong>Year:</strong></div>
+                <ul class="list-unstyled small mb-0">
+                    <li>
+                        <span class="badge bg-white text-dark">
+                            {{ t.start_year or "—" }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="/title/{{ t.tconst }}" class="btn btn-warning btn-sm mt-auto align-self-center">
+                View details
+            </a>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+{% endblock %}

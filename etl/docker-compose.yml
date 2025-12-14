@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: imdb_etl
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      ETL_DOWNLOAD_DIR: ${ETL_DOWNLOAD_DIR}
+    volumes:
+      - ./data:/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true

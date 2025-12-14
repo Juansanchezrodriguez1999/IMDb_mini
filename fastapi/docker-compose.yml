@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  fastapi:
+    build: .
+    container_name: imdb_fastapi
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      ETL_DOWNLOAD_DIR: ${ETL_DOWNLOAD_DIR}
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
